@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery使用/jquery.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    button{
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        justify-content: center;
+    }
+    input{
+        width: 40px;
+        height: 17px;
+        line-height: 17px;
+        justify-content: center;
+        text-align: center;
+    }
+    .cart-item{
+        width: 100px;
+       
+    }
+    .checked-item{
+        background-color: aqua;
+    }
+</style>
+<script>
+    $(function(){
+        
+       /* 小计 */
+        $(".jia").click(function(){
+            var n = $(this).siblings("input").val()
+            n++;
+            $(this).siblings(".p-num").val(n)
+            $(this).parent(".num").siblings(".allprice").text((n* $(this).siblings(".price").text()).toFixed(2))
+            getSum()
+
+        })
+        $(".jian").click(function(){
+            var n = $(this).siblings("input").val()
+            if(n==1)
+                return false
+                n--;
+            $(this).siblings(".p-num").val(n)
+            $(this).parent(".num").siblings(".allprice").text((n* $(this).siblings(".price").text()).toFixed(2))
+            getSum()
+        })
+        $("input").change(function(){
+            $(this).parent(".num").siblings(".allprice").html(($(this).siblings(".price").text()*$(this).val()).toFixed(2))
+            getSum()
+        })
+        /* 删除 */
+        $(".p-action a").click(function(){
+            $(this).parent().parent().remove()
+            getSum()
+           if($("a").length===1){
+            $(".allnum").text(0)
+            $(".allitemprice").text(0)
+           };
+        })
+        /* 全选框 */
+        $(".checkall").change(function(){
+            $(".checkall,.j-checkbox").prop("checked",$(this).prop("checked"))
+            if($(this).prop("checked")){
+                $(".j-checkbox").parent().parent().addClass("checked-item")
+            }else{
+                $(".j-checkbox").parent().parent().removeClass("checked-item")
+            }
+            
+        })
+        $(".j-checkbox").change(function(){
+            
+            if($(".j-checkbox:checked").length===$(".j-checkbox").length){
+                $(".checkall").prop("checked",true);
+                
+            }else{
+                $(".checkall").prop("checked",false);
+            }
+            /* 选中商品改背景颜色 */
+            if($(this).prop("checked")){
+                $(this).parent().parent().addClass("checked-item")
+            }else{
+                $(this).parent().parent().removeClass("checked-item")
+            }
+        })
+        
+        /* 删除选中 */
+        $(".shanchu a").click(function(){
+            if($(".checkall").prop("checked")==true){
+                $(".allnum").text(0)
+                $(".allitemprice").text(0)
+
+            }
+            $(".j-checkbox:checked").parent().parent().remove()
+            $(".checkall").prop("checked",false);
+            getSum()
+
+        })
+        /* 总计 */
+        getSum()
+        function getSum(){
+            var count=0;
+            var money=0;
+            $(".p-num").each(function(i,ele){
+                count+=parseInt($(ele).val())
+                $(".allnum").text(count)
+
+            })
+            $(".allprice").each(function(i,ele){
+                money+=parseFloat($(ele).text())
+                $(".allitemprice").text(money.toFixed(2))
+
+            })
+        }
+        
+
+        
+
+
+    })
+</script>
+<body>
+    <div class="t-checkbox">
+        <input type="checkbox" class="checkall">全选
+    </div>
+    <div class="box">
+        <div class="cart-item">
+            <div class="p-checkbox">
+                <input type="checkbox" class="j-checkbox">
+            </div>
+            <span>单价：</span>
+            <div class="num">
+                <div class="price">11.22</div>
+                <button class="jia">+</button>
+                <input type="text" name="" id="" class="p-num" value="1">
+                <button class="jian">-</button>
+            </div>
+            <span>总价：</span>
+            <div class="allprice">11.22</div>
+            <div class="p-action">
+                <a href="#">删除</a>
+            </div>
+
+        </div>
+        <br>
+        
+
+        <div class="cart-item">
+            <div class="p-checkbox">
+                <input type="checkbox" class="j-checkbox">
+            </div>
+            <span>单价：</span>
+            <div class="num">
+                <div class="price">12.22</div>
+                <button class="jia">+</button>
+                <input type="text" name="" id="" class="p-num" value="1">
+                <button class="jian">-</button>
+               
+            </div>
+            <span>总价：</span>
+            <div class="allprice">12.22</div>
+            <div class="p-action">
+                <a href="#">删除</a>
+            </div>
+
+        </div>
+        <br>
+        <div class="cart-item">
+            <div class="p-checkbox">
+                <input type="checkbox" class="j-checkbox">
+            </div>
+            <span>单价：</span>
+            <div class="num">
+                <div class="price">13.22</div>
+                <button class="jia">+</button>
+                <input type="text" name="" id="" class="p-num" value="1">
+                <button class="jian">-</button>
+                
+            </div>
+            <span>总价：</span>
+            <div class="allprice">13.22</div>
+            <div class="p-action">
+                <a href="#">删除</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="t-checkbox">
+        <input type="checkbox" class="checkall">全选
+    </div>
+    总计
+    <div class="all">
+        <span>总数量</span>
+        <div class="allnum">
+            1
+        </div>
+        <span>总金额</span>
+        <div class="allitemprice">
+            1
+        </div>
+    </div>
+    <div class="shanchu">
+        <a href="#">删除选中</a>
+    </div>
+    
+</body>
+</html>

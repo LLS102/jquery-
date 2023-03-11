@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery使用/jquery.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    li{
+        list-style: none;
+    }
+    a{
+        text-decoration: none;
+    }
+    .list{
+        width: 250px;
+        position: relative;
+    }
+    .list li{
+        display: block;
+        width: 50px;
+        height: 30px;
+        line-height: 30px;
+        float: left;
+        text-align: center;
+    }
+    .item{
+        width: 250px;
+        height: 100px;
+        background-color: aqua;
+        top: 30px;
+        position: absolute;
+        display: none;
+    }
+    .current{
+        background: red;
+    }
+    .col{
+        display: block;
+    }
+
+</style>
+<script>
+    $(function(){
+        $(".list li").click(function(){
+            $(this).addClass("current").siblings().removeClass("current")
+            var index=$(this).index()
+            console.log(index);
+            $(".content .item").eq(index).show().siblings().hide()
+        })
+        
+    })
+
+</script>
+<body>
+    <div class="tab">
+        <div class="list">
+            <ul>
+                <li class="current">1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="item col">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+        </div>
+    </div>
+    
+</body>
+</html>

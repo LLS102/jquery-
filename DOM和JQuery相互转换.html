@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery使用/jquery.js"></script>
+</head>
+<style>
+    div{
+        width: 200px;
+        height: 200px;
+        background-color: aqua;
+    }
+</style>
+<script>
+    window.onload=function(){
+        var div=document.querySelector("div")
+        //DOM隐藏
+       /*  div.style.display="none" */
+       //jQuery隐藏 Dom转jQuery
+       /* $("div").hide() */
+       //jQuery转Dom 因为有些方法jQuery没有封装
+       //$("div")[0].style.display="none"
+       //或者
+       $("div").get(0).style.display="none"
+    }
+  
+</script>
+<body>
+    <div></div>
+    
+</body>
+</html>

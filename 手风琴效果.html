@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery使用/jquery.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    
+    .box{
+        width: 600px;
+        height: 120px;
+        background-color: aqua;
+
+    }
+    li{
+        position: relative;
+        list-style: none;
+        display: block;
+        width: 110px;
+        height: 100px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        float: left;
+
+
+    }
+    .big{
+        width: 110px;
+        height: 100px;
+        background-color: blueviolet;
+        position: absolute;
+        display: none;
+    }
+    .small{
+        width: 50px;
+        height: 100px;
+        background-color: chartreuse;
+        position: absolute;
+        
+        
+    }
+    .current .big{
+        display: block;
+    }
+    .current .small{
+        display: none;
+    }
+
+</style>
+<script>
+    $(function(){
+        $(".box li").mouseenter(function(){
+            $(this).stop().animate({
+                width:110
+            },500).find(".small").stop().fadeOut().siblings(".big").stop().fadeIn()
+            $(this).siblings("li").stop().animate({
+                width:60
+            }).find(".small").stop().fadeIn().siblings(".big").stop().fadeOut()
+
+        })
+    })
+</script>
+<body>
+    <div class="box">
+        <ul>
+            <li class="current">
+                <a href="#">
+                    <div class="con">
+                        <div class="small"></div>
+                        <div class="big"></div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="con">
+                        <div class="small"></div>
+                        <div class="big"></div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="con">
+                        <div class="small"></div>
+                        <div class="big"></div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="con">
+                        <div class="small"></div>
+                        <div class="big"></div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="con">
+                        <div class="small"></div>
+                        <div class="big"></div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="con">
+                        <div class="small"></div>
+                        <div class="big"></div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="con">
+                        <div class="small"></div>
+                        <div class="big"></div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+</body>
+</html>
+

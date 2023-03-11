@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery使用/jquery.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+   /*  body{
+        height: 3500px;
+    } */
+    .shangp{
+        width: 800px;
+        height: 500px;
+        background-color: aqua;
+       
+        margin: 0 auto;
+        margin-bottom: 100px;
+    }
+    li{
+        list-style: none;
+        display: block;
+        height: 40px;
+        border-bottom: 1px black solid;
+        background-color: rgb(155, 155, 230);
+    }
+    .con div{
+        width: 800px;
+        height: 800px;
+        background-color: aqua;
+        margin: 0 auto;
+        margin-bottom: 50px;
+    }
+    .daohang{
+        position: fixed;
+        left: 0;
+        top: 150px;
+        width: 100px;
+        height: 160px;
+        line-height: 40px;
+        text-align: center;
+        border: 1px black solid;
+        display: none;
+
+    }
+    .current{
+        background-color: rgb(18, 18, 233);
+    }
+</style>
+<script>
+    /* 滚动显示 */
+    $(function(){
+        var flag=true
+        var top=$(".sj").offset().top
+        gun()
+        function gun(){
+            if($(document).scrollTop()>=top){
+                $(".daohang").fadeIn()
+            }else{
+                $(".daohang").fadeOut()
+            }
+        }
+        $(window).scroll(function(){
+            gun()
+            /* 页面滚动显示li */
+            if(flag){
+                $(".con .w").each(function(i,ele){
+                if($(document).scrollTop()>=$(ele).offset().top-10){
+                    $(".daohang li").eq(i).addClass("current").siblings().removeClass("current")
+                }
+
+            })
+            }
+            
+
+           
+        })
+    /* 点击显示 */
+    $(".daohang li").click(function(){
+        flag=false
+        var index=$(this).index()
+        var current=$(".con div").eq(index).offset().top
+        $("body,html").stop().animate({
+            scrollTop:current
+        },function(){
+            flag=true
+            
+        })
+        $(this).addClass("current").siblings().removeClass("current")
+    })
+    
+  
+
+    })
+</script>
+<body>
+    <div class="shangp">商品</div>
+    <div class="con">
+        <div class="sj w">手机</div>
+        <div class="jiaju w">家具</div>
+        <div class="dianqi w">电器</div>
+        <div class="wanju w">玩具</div>
+    </div>
+    <div class="daohang">
+        <ul>
+            <li class="current">手机</li>
+            <li>家具</li>
+            <li>电器</li>
+            <li>玩具</li>
+        </ul>
+    </div>
+</body>
+</html>
